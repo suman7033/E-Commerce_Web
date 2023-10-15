@@ -1,9 +1,7 @@
 import React from 'react'
 import DispalyHeadLine from './DispalyHeadLine';
-import Product from './Card';
-import CartItem from './CartItem';
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div>
        <ul className="nav h4  border-4 p-2 border-primary position-relative m-8 fs-2 justify-content-center bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -22,9 +20,10 @@ const Navbar = () => {
       ABOUT
     </a>
   </li>
+  <div className='cart' onClick={()=> props.setShowCart(true)}>Cart
+    <sup>{props.count}</sup></div>
 </ul>
-    <DispalyHeadLine></DispalyHeadLine><br/>
-    <CartItem/>
+    <DispalyHeadLine></DispalyHeadLine>
     </div>
   )
 }

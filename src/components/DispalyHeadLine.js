@@ -1,12 +1,13 @@
 import React from 'react'
+import './Header.css'
 
 const DispalyHeadLine = () => {
   return (
-    <div>
-      <div className="p-5 w-100% bg-secondary">
-        <h1 className='mt-5 position-relative start-50'>The Generics</h1>
-        </div>
-        <h1 className='mt-4 position-absolute bottom-40 start-50'><b>MUSIC</b></h1><br/><br/>
+    <div className='flex shoping_cart'>
+      <div className="p-4 w-100%">
+        <h1 className='h1 mt-3'>The Generics</h1>
+        </div><br/>
+        {/* <h1 className=' position-absolute bottom-50 start-50'><b>MUSIC</b></h1> */}
     </div>
   )
 }
