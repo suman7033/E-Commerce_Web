@@ -1,6 +1,7 @@
 import React from 'react'
 import DispalyHeadLine from './DispalyHeadLine';
-import Product from './Product';
+import Product from './Card';
+import CartItem from './CartItem';
 
 const Navbar = () => {
   return (
@@ -23,7 +24,7 @@ const Navbar = () => {
   </li>
 </ul>
     <DispalyHeadLine></DispalyHeadLine><br/>
-    <Product></Product>
+    <CartItem/>
     </div>
   )
 }
