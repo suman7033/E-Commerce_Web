@@ -1,9 +1,18 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 import React,{useState} from 'react'
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import CartList from './components/CartList';
+import Home from './components/Home';
+import About from "./components/About";
 
-const App = () => {
+
+export default function App(){
   const [product,setProduct] = useState([
 
     {
@@ -45,24 +54,35 @@ const App = () => {
     ])
   const [cart,setCart]=useState([]);
   const [showCart,setShowCart]=useState(false);
+  const [props,setProps]=useState([]);
+  const [showAbout,setShowAbout]=useState(false);
    
   const addToCart=(data)=>{
     console.log(data)
     setCart([...cart,{...data,quantity: 1}])
   }
-
+   
   return (
-    <div>
-      <Navbar count={cart.length} setShowCart={setShowCart}/>
+    <>
+      <Router>
+      <Navbar count={cart.length} setShowCart={setShowCart} setShowAbout={setShowAbout}/>
+      <Routes>
+          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/about" element={<About/>}/>
+        </Routes>
       {
-        showCart ?
+        showCart ? 
         <CartList cart={cart}/>:
       <ProductList product={product} addToCart={addToCart}/>
-
+      },
+      {
+        showAbout ?
+        <About props={props}/>:
+        <ProductList product={product} addToCart={addToCart}/>
       }
-
-    </div>
+         
+      </Router>
+    </>
   )
 }
 
-export default App;
