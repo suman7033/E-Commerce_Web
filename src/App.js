@@ -4,12 +4,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import React,{useState} from 'react'
+import React,{useContext, useState,Redirect} from 'react'
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import CartList from './components/CartList';
-import Home from './components/Home';
+import Home from "./components/Home";
 import About from "./components/About";
+import Login from "./components/Login";
+//import AuthContext from "./store/auth-context";
 
 
 export default function App(){
@@ -54,35 +56,35 @@ export default function App(){
     ])
   const [cart,setCart]=useState([]);
   const [showCart,setShowCart]=useState(false);
-  const [props,setProps]=useState([]);
-  const [showAbout,setShowAbout]=useState(false);
    
   const addToCart=(data)=>{
     console.log(data)
     setCart([...cart,{...data,quantity: 1}])
   }
+  //const authCtx=useContext(AuthContext);
    
   return (
     <>
       <Router>
-      <Navbar count={cart.length} setShowCart={setShowCart} setShowAbout={setShowAbout}/>
+      <Navbar count={cart.length} setShowCart={setShowCart}>
       <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/about" element={<About/>}/>
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/about" element={<About/>}></Route>
+          
+          <Route path='/profile'>
+           <Route path="/store" element={<ProductList product={product} addToCart={addToCart}/>}/>
+           <Redirect to="/login" element={<Login/>}/>
+          </Route>           
         </Routes>
-      {
+      {/* {
         showCart ? 
         <CartList cart={cart}/>:
       <ProductList product={product} addToCart={addToCart}/>
-      },
-      {
-        showAbout ?
-        <About props={props}/>:
-        <ProductList product={product} addToCart={addToCart}/>
-      }
-         
+      } */}
+      </Navbar>
       </Router>
     </>
+     
   )
 }
 
