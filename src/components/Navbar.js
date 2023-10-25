@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useContext} from "react";
 import DispalyHeadLine from './DispalyHeadLine';
 import AuthContext from "../store/auth-context";
@@ -26,9 +26,9 @@ const Navbar = (props) => {
   </li>
   <div className='cart' onClick={()=> props.setShowCart(true)}>Cart
     <sup>{props.count}</sup></div> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    <div>
-<Link className="login" to='/login'>Login</Link>
-</div>
+    <div>  
+    <Link to='/login'>Login</Link>
+    </div>
 </ul>
  
     <DispalyHeadLine></DispalyHeadLine>

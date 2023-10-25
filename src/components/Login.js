@@ -1,11 +1,14 @@
 import React, { useState,useRef,useContext } from 'react'
 import classes from './login.module.css'
 import AuthContext from '../store/auth-context';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Home from './Home';
 
 const Login = () => {
     const [isLogin, setIsLogin]=useState(true);
     const [isLoading,setIsLoading]=useState(false);
     const authCtx=useContext(AuthContext);
+    const navigate=useNavigate();
 
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
@@ -44,7 +47,6 @@ const Login = () => {
                return res.json()
                .then((data)=>{
                 let errorMessage='Authentication failed'
-                  console.log(data);
                   throw new Error(errorMessage);
                })
             }
@@ -52,6 +54,8 @@ const Login = () => {
         .then((data)=>{
             authCtx.login(data.idToken);
             //history.resplace('/')
+            alert("Sucessfully Login");
+            navigate('/store');
         })
         .catch(err=>{
             alert(err.message);
