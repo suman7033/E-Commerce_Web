@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   BrowserRouter,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import React,{useState,useContext, Suspense} from 'react'
 import Navbar from './components/Navbar';
@@ -14,6 +14,7 @@ import Home from './components/Home';
 import About from "./components/About";
 import Login from './components/Login';
 import AuthContext from "./store/auth-context";
+import UserProfile from "./components/UserProfile";
 
 const App=()=> {
   const [product,setProduct] = useState([
@@ -59,12 +60,13 @@ const App=()=> {
   //const [props,setProps]=useState([]);
   const [showAbout,setShowAbout]=useState(false);
   const authCtx=useContext(AuthContext);
-  const isLoggedIn=authCtx.isLoggedIn;
-  console.log(isLoggedIn);
+  console.log(authCtx);
+  //const isLoggedIn=authCtx.isLoggedIn;
 
   const addToCart=(data)=>{
     console.log(data)
     setCart([...cart,{...data,quantity: 1}])
+
   }
   return (
     <BrowserRouter>
@@ -88,20 +90,19 @@ const App=()=> {
           <Route path="/" element={<Home/>}/>
             <Route
               path="/store"
-              element={isLoggedIn ? <ProductList product={product} addToCart={addToCart}/> : 
+              element={authCtx.isLoggedIn ? <ProductList product={product} addToCart={addToCart}/> : 
               <Navigate to="/login"/>}
             />
             {/* <Route path="/login" element={<Login/>}/> */}
             <Route
               path="/about"
-              element={isLoggedIn ? <About/> : <Navigate to="/login"/>}
+              element={authCtx.isLoggedIn ? <About/> : <Navigate to="/login"/>}
             />
             <Route
               path="/login"
-              element={!isLoggedIn ? <Login/> : <Navigate to="/store"/>}
+              element={!authCtx.isLoggedIn ? <Login/> :  <Navigate to='/store'/>}
             />
-            <Route path="*" element={<Navigate to="/home" />} />
-          {/* </Route> */}
+          <Route path="/profile" element={<UserProfile/>}/>
         </Routes>
        </Suspense>
     </BrowserRouter>

@@ -2,6 +2,7 @@ import React from 'react'
 import './Header.css'
 
 const ProductList = ({product,addToCart}) => {
+  console.log("insert store");
   return (
     <div className='flex'>
       {

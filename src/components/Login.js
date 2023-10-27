@@ -9,6 +9,7 @@ const Login = () => {
     const [isLoading,setIsLoading]=useState(false);
     const authCtx=useContext(AuthContext);
     const navigate=useNavigate();
+    console.log(authCtx.isLoggedIn);
 
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
@@ -53,9 +54,13 @@ const Login = () => {
         })
         .then((data)=>{
             authCtx.login(data.idToken);
+            //console.log(data.idToken);
             //history.resplace('/')
+            
             alert("Sucessfully Login");
             navigate('/store');
+            
+            
         })
         .catch(err=>{
             alert(err.message);
@@ -83,4 +88,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

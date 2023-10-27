@@ -2,6 +2,7 @@ import {Link, Navigate} from "react-router-dom";
 import {useContext} from "react";
 import DispalyHeadLine from './DispalyHeadLine';
 import AuthContext from "../store/auth-context";
+import ProfilePic from '../Img/icon.png';
 
 const Navbar = (props) => {
   const authCtx=useContext(AuthContext);
@@ -25,9 +26,17 @@ const Navbar = (props) => {
     </Link>
   </li>
   <div className='cart' onClick={()=> props.setShowCart(true)}>Cart
-    <sup>{props.count}</sup></div> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <sup>{props.count}</sup></div> &nbsp; &nbsp;
     <div>  
     <Link to='/login'>Login</Link>
+    </div>
+    <div> &nbsp; &nbsp; 
+      <Link to='/profile'>
+        <img src={ProfilePic} alt=""/>
+      </Link>
+    </div> &nbsp; &nbsp;
+    <div>
+      <button type="button" className="btn btn-dark">Logout</button>
     </div>
 </ul>
  
