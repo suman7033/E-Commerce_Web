@@ -41,6 +41,7 @@ export const AuthContextProvider=(props)=>{
        setIsLoggedIn(false);
     }
     console.log(isLoggedIn);
+    
     const contextValue={
         token: token,
         //isLoggedIn: userIsLoggedIn,

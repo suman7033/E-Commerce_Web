@@ -10,6 +10,7 @@ const Login = () => {
     const authCtx=useContext(AuthContext);
     const navigate=useNavigate();
     console.log(authCtx.isLoggedIn);
+    console.log(authCtx);
 
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
@@ -26,7 +27,7 @@ const Login = () => {
         if(isLogin){
             url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBAwK4k_DJN45d8bjQFpZk-MsnTCfd2lUE'
         }else{
-            url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBAwK4k_DJN45d8bjQFpZk-MsnTCfd2lUE'
+            url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBAwK4k_DJN45d8bjQFpZk-MsnTCfd2lUE'
         }
         fetch(url,{
             method: 'POST',

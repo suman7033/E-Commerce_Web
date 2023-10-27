@@ -60,8 +60,6 @@ const App=()=> {
   //const [props,setProps]=useState([]);
   const [showAbout,setShowAbout]=useState(false);
   const authCtx=useContext(AuthContext);
-  console.log(authCtx);
-  //const isLoggedIn=authCtx.isLoggedIn;
 
   const addToCart=(data)=>{
     console.log(data)
@@ -103,6 +101,9 @@ const App=()=> {
               element={!authCtx.isLoggedIn ? <Login/> :  <Navigate to='/store'/>}
             />
           <Route path="/profile" element={<UserProfile/>}/>
+
+          <Route path="/cart" element={showCart ? <CartList cart={cart}/> :
+           <ProductList product={product} addToCart={addToCart}/>}/>
         </Routes>
        </Suspense>
     </BrowserRouter>
