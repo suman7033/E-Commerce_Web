@@ -14,7 +14,7 @@ const ProductList = ({product,addToCart}) => {
                      <p>{productItem.title}</p>
                      <img src={productItem.imageUrl} width='50%'/>
                      <h3>Rs. {productItem.price}</h3>
-                     <button onClick={()=> addToCart(productItem)}>Add To Cart</button>
+                     <button className='btn btn-outline-success' onClick={()=> addToCart(productItem)}>Add To Cart</button>
                    </div>
                 </div>
             )

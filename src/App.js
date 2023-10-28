@@ -100,7 +100,7 @@ const App=()=> {
               path="/login"
               element={!authCtx.isLoggedIn ? <Login/> :  <Navigate to='/store'/>}
             />
-          <Route path="/profile" element={<UserProfile/>}/>
+          <Route path="/profile" element={authCtx.isLoggedIn ? <UserProfile/> : <Navigate to='/login'/>}/>
 
           <Route path="/cart" element={showCart ? <CartList cart={cart}/> :
            <ProductList product={product} addToCart={addToCart}/>}/>

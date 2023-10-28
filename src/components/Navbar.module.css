@@ -1,0 +1,40 @@
+.cart{
+    background-color: rgb(234, 44, 174);
+    border-radius: 10px;
+    color: rgb(238, 241, 77);
+    width: 75px;
+    height: 50px;
+    
+}
+.count{
+    color: rgb(27, 246, 7);
+    
+}
+.cart-button {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Plus and Minus Icon Styles */
+.cart-button{
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+/* Plus Button Styles */
+.plus-button {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+}
+
+/* Minus Button Styles */
+.minus-button {
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+}
+ 

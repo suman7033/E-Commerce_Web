@@ -3,6 +3,7 @@ import {useContext} from "react";
 import DispalyHeadLine from './DispalyHeadLine';
 import AuthContext from "../store/auth-context";
 import ProfilePic from '../Img/icon.png';
+import classes from './Navbar.module.css';
 
 const Navbar = (props) => {
   const authCtx=useContext(AuthContext);
@@ -27,11 +28,11 @@ const Navbar = (props) => {
   <li className="nav-item">
     <Link className="nav-link text-light bg-dark" to="/about">
       ABOUT
-    </Link>
+    </Link> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
   </li>
 
-  <Link className='cart' onClick={()=> props.setShowCart(true)} to="/cart">Cart
-    <sup>{props.count}</sup></Link> &nbsp; &nbsp;
+  <Link className={classes.cart} onClick={()=> props.setShowCart(true)} to="/cart">Cart
+    <sup className={classes.count}>{props.count}</sup></Link> &nbsp; &nbsp;
 
     <div>  
     <Link to='/login'>Login</Link>

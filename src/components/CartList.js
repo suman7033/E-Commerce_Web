@@ -11,37 +11,37 @@ const CartList = ({cart}) => {
   },[cart])
 
   return (
-    <div>
+    <div className='cartshow'>
       {
         CART?.map((cartItem,cartIndex)=>{
             return (
                 <div>
-                    <img src={cartItem.imageUrl} width={40}/>
-                    <span>{cartItem.title}</span>
-                    <button 
+                    <img className='img' src={cartItem.imageUrl} width={60}/><br/>
+                    <span><b>{cartItem.title}</b></span><br/>
+                    <button className='minus-button'
                     onClick={()=>{
                       const _CART=CART.map((item,index)=>{
                         return cartIndex===index ? {...item, quantity: item.quantity>0 ? item.quantity -1 : 0}:item
                       })
-                      SETCART(_CART)}}>-</button>
-                    <span>{cartItem.quantity}</span>
-                    <button 
+                      SETCART(_CART)}}>-</button> &nbsp; 
+                    <span><b>{cartItem.quantity}</b></span>&nbsp; &nbsp;
+                    <button className='plus-button'
                     onClick={()=>{
                       const _CART=CART.map((item,index)=>{
                         return cartIndex===index ? {...item, quantity: item.quantity+1}:item
                       })
                       SETCART(_CART)
-                    }}>+</button>
-                    <span>Rs. {cartItem.price*cartItem.quantity}</span>
+                    }}>+</button>&nbsp;
+                    <span><b>Rs. {cartItem.price*cartItem.quantity}</b></span><hr/>
                 </div>
             )
         })
       }
-      <p> Total: <span> </span>
+      <b><p className='total'> Total: <span> </span>
         {
           cart.map(item => item.price*item.quantity).reduce((total,value)=> total+value)
         }
-      </p>
+      </p></b>
     </div>
   )
 }
