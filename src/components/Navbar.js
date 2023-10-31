@@ -1,15 +1,19 @@
 import {Link, Navigate} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import DispalyHeadLine from './DispalyHeadLine';
 import AuthContext from "../store/auth-context";
 import ProfilePic from '../Img/icon.png';
 import classes from './Navbar.module.css';
+import CrudFun from "./CrudFun";
+import Login from "./Login";
+import Home from "./Home";
 
 const Navbar = (props) => {
+
+   
+  
   const authCtx=useContext(AuthContext);
-  const logoutFunction=()=>{
-     authCtx.logout();
-  }
+       
    
   return (
     <div>
@@ -31,10 +35,10 @@ const Navbar = (props) => {
     </Link> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
   </li>
 
-  <Link className={classes.cart} onClick={()=> props.setShowCart(true)} to="/cart">Cart
+  <Link className={classes.cart} to="/cart">Cart
     <sup className={classes.count}>{props.count}</sup></Link> &nbsp; &nbsp;
 
-    <div>  
+    <div> 
     <Link to='/login'>Login</Link>
     </div>
     <div> &nbsp; &nbsp; 
@@ -43,12 +47,13 @@ const Navbar = (props) => {
       </Link>
     </div> &nbsp; &nbsp;
     <div>
-      <button type="button" className="btn btn-dark"onClick={logoutFunction}>Logout</button>
+      <button type="button" className="btn btn-dark" onClick={()=>authCtx.logout()}>Logout</button>
     </div>
-    
+    {/* onClick={()=>authCtx.logOut()} */}
+    {/* onClick={()=>function} */}
 </ul>
- 
-    <DispalyHeadLine></DispalyHeadLine>
+    <DispalyHeadLine/>
+    {/* {authCtx.isLoggedIn ? <CrudFun/>: null} */}
     <div>{props.children}</div>
     </div>
   )

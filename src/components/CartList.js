@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './Header.css'
 
 const CartList = ({cart}) => {
-  
+
+ 
   const [CART,SETCART]=useState([])
 
   useEffect(()=>{
 
     SETCART(cart);
   },[cart])
-
   return (
     <div className='cartshow'>
       {
@@ -39,11 +39,12 @@ const CartList = ({cart}) => {
       }
       <b><p className='total'> Total: <span> </span>
         {
-          cart.map(item => item.price*item.quantity).reduce((total,value)=> total+value)
+          cart?.map(item => item.price*item.quantity).reduce((total,value)=> total+value,0)
         }
+        
       </p></b>
     </div>
   )
 }
 
-export default CartList
+export default CartList;

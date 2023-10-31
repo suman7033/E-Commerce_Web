@@ -9,8 +9,8 @@ const Login = () => {
     const [isLoading,setIsLoading]=useState(false);
     const authCtx=useContext(AuthContext);
     const navigate=useNavigate();
-    console.log(authCtx.isLoggedIn);
-    console.log(authCtx);
+    //console.log(authCtx.isLoggedIn);
+    //console.log(authCtx);
 
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
@@ -54,7 +54,8 @@ const Login = () => {
             }
         })
         .then((data)=>{
-            authCtx.login(data.idToken);
+            authCtx.login(data.idToken,data.email);
+            
             //console.log(data.idToken);
             //history.resplace('/')
             
