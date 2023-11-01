@@ -71,6 +71,13 @@
 .total{
     color: #0a0308;
 }
+.cross{
+    border: none;
+    background-color: white;
+    margin-top: none;
+    justify-content: right;
+    margin-left: 150px
+}
 
 
 

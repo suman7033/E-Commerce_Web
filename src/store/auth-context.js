@@ -1,11 +1,17 @@
 import React, { useState,useEffect } from 'react'
 
 const AuthContext =React.createContext({
+    items: [],
+    totalAmount: 0,
     token: '',
     email: "",
     isLoggedIn: false,
     login: (token)=>{},
-    logout: ()=>{}
+    logout: ()=>{},
+
+    addItem: (item)=>{},
+    removeItem: (id) =>{},
+    //clearCart: ()=>{},
 })
 
 
@@ -14,6 +20,11 @@ export const AuthContextProvider=(props)=>{
     const initialEmail=localStorage.getItem("email");
     const [token, setToken]=useState(initialToken);
     const [email,setEmail]=useState(initialEmail);
+
+    const [items,setItems]=useState([]);
+    const [totalAmount,setTotalAmount]=useState(0);
+    const [quantity,setQuantity]=useState(0)
+
     //const [isLoggedIn,setisLoggedIn]=useState(false);
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!initialToken);
@@ -46,8 +57,19 @@ export const AuthContextProvider=(props)=>{
        //setShowCart(false);
        setIsLoggedIn(false);
     }
-    console.log(isLoggedIn);
+    //console.log(isLoggedIn);
     
+    const addItemHandler=(items)=>{
+       console.log("addItemHandler",items);
+    }
+    const removeItemHandler=()=>{
+        
+
+    }
+    // const clearCartHandler=()=>{
+
+    // }
+
     const contextValue={
         token: token,
         email: email,
@@ -55,6 +77,13 @@ export const AuthContextProvider=(props)=>{
         isLoggedIn: isLoggedIn,
         login: loginHandler,
         logout: logoutHandler,
+
+        totalAmount: totalAmount,
+        items: items,
+        quantity: quantity,
+        addItem: addItemHandler,
+        removeItem: removeItemHandler,
+        //clearCart: clearCartHandler,
     }
     return (
         <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>

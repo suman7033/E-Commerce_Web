@@ -62,7 +62,7 @@ const App=()=> {
   //const [props,setProps]=useState([]);
   const [showAbout,setShowAbout]=useState(false);
   const authCtx=useContext(AuthContext);
-  console.log("auth.email",authCtx.email);
+  //console.log("auth.email",authCtx.email);
 
   //const ChangeEmail=authCtx.email.replace('@','').replace('.','')
   let ChangeEmail;
@@ -72,9 +72,10 @@ const App=()=> {
 
   const addToCart=(data)=>{
     //console.log("data",data);
-    axios.post(`https://crudcrud.com/api/e6bd814bf8884a2fb8702f413964586c/${ChangeEmail}`,data)
+    axios.post(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`,data)
         .then((res)=>{
             console.log("response_data after post",res.data);
+            authCtx.addItem(res.data);
         })
         .catch((error)=>{
             alert("Error",error)
@@ -86,14 +87,15 @@ const App=()=> {
     if(!authCtx.isLoggedIn){
       setCart([])
     }else{
-    axios.get(`https://crudcrud.com/api/e6bd814bf8884a2fb8702f413964586c/${ChangeEmail}`)
+    axios.get(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`)
     .then((res)=>{
-      console.log("get response",res.data);
+      //console.log("get response",res.data);
       setCart(res.data);
       
     })
   }
   },[authCtx.isLoggedIn]);
+
   return (
   <>
     <BrowserRouter>
@@ -126,4 +128,4 @@ const App=()=> {
   );
 }
 
-export default App;
+export default App

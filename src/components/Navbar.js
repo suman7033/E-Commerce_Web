@@ -4,9 +4,6 @@ import DispalyHeadLine from './DispalyHeadLine';
 import AuthContext from "../store/auth-context";
 import ProfilePic from '../Img/icon.png';
 import classes from './Navbar.module.css';
-import CrudFun from "./CrudFun";
-import Login from "./Login";
-import Home from "./Home";
 
 const Navbar = (props) => {
 

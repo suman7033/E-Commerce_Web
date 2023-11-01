@@ -1,22 +1,58 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import './Header.css'
+import CrossIcon from '../Img/cut_icon.png'
+import axios from 'axios';
+import AuthContext from '../store/auth-context';
 
 const CartList = ({cart}) => {
 
- 
   const [CART,SETCART]=useState([])
+  const authCtx=useContext(AuthContext);
+  
+  const ChangeEmail=authCtx.email.replace('@','').replace('.','')
 
   useEffect(()=>{
 
     SETCART(cart);
   },[cart])
+     
+   const getCall=(data)=>{
+     axios.get(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`)
+     .then((result)=>{
+      console.log("result",result);
+      console.log(result.title);
+      SETCART(result.data,result.data.quantity,result.data.price);
+      //console.log(result.data.quantity);
+     })
+     .catch((error)=>{
+        alert(error);
+     })
+     //SETCART([...cart,{...data,quantity: 1}])
+     //SETCART(result.data);
+   }
+
+   const deleteHandler=(id)=>{
+      //alert(id);
+      axios.delete(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}/${id}`)
+      .then((res)=>{
+        console.log("delete",res);
+        getCall();
+        // const update=CART.filter(item =>item !==res)
+        // console.log("update",update);
+        // SETCART(update);
+      })
+      .catch((error)=>{
+        alert(error);
+      })
+   }
   return (
     <div className='cartshow'>
       {
         CART?.map((cartItem,cartIndex)=>{
             return (
                 <div>
-                    <img className='img' src={cartItem.imageUrl} width={60}/><br/>
+                  <button className='cross' onClick={()=>deleteHandler(cartItem._id)}><img src={CrossIcon} width={30}/></button><br/>
+                    <img className='img' src={cartItem.imageUrl} width={60}/> <br/>
                     <span><b>{cartItem.title}</b></span><br/>
                     <button className='minus-button'
                     onClick={()=>{

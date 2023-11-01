@@ -2,7 +2,6 @@ import React, { useState,useRef,useContext } from 'react'
 import classes from './login.module.css'
 import AuthContext from '../store/auth-context';
 import { Navigate, useNavigate } from 'react-router-dom';
-import Home from './Home';
 
 const Login = () => {
     const [isLogin, setIsLogin]=useState(true);
