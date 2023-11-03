@@ -62,7 +62,7 @@ export const AuthContextProvider=(props)=>{
        console.log("addItemHandler",props);
        //setItems(...prv,props);
        setItems((prev)=>[...prev,props])
-       setQuantity(quantity+1);
+       //setQuantity(quantity+1);
     }
     const removeItemHandler=(id)=>{
         //setQuantity(quantity-1);

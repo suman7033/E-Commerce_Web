@@ -56,7 +56,7 @@ const App=()=> {
         quantity: 6,
         }
     ])
-  const [cart,setCart]=useState([]);
+  //const [cart,setCart]=useState([]);
   const authCtx=useContext(AuthContext);
   //console.log("auth.email",authCtx.email);
 
@@ -68,7 +68,7 @@ const App=()=> {
 
   const addToCart=(data)=>{
     //console.log("data",data);
-    axios.post(`https://crudcrud.com/api/507c456eea8a4ee5a8c4429de7076c07/${ChangeEmail}`,data)
+    axios.post(`https://crudcrud.com/api/cc02e4e223a640b3a4599975db3eee7c/${ChangeEmail}`,data)
         .then((res)=>{
             console.log("response_data after post",res.data);
             authCtx.addItem(res.data);
@@ -76,20 +76,21 @@ const App=()=> {
         .catch((error)=>{
             alert("Error",error)
         })
-    setCart([...cart,{...data,quantity: 1}])
+    //setCart([...cart,{...data,quantity: 1}])
   }
 
   useEffect(()=>{
     if(!authCtx.isLoggedIn){
-      setCart([])
+      //setCart([])
+      authCtx.setItem([])
     }else{
-    axios.get(`https://crudcrud.com/api/507c456eea8a4ee5a8c4429de7076c07/${ChangeEmail}`)
+    axios.get(`https://crudcrud.com/api/cc02e4e223a640b3a4599975db3eee7c/${ChangeEmail}`)
     .then((res)=>{
       authCtx.setItem(res.data);
       console.log("usefeect",res.data);
       //authCtx.quantity
       //console.log("get response",res.data);
-      setCart(res.data);
+      //setCart(res.data);
       
     })
   }
@@ -98,7 +99,7 @@ const App=()=> {
   return (
   <>
     <BrowserRouter>
-      <Navbar count={cart.length}/>
+      <Navbar count={authCtx.items.length}/>
       <Suspense fallback={<h1>Loading...</h1>}>
        <Routes>
           <Route path="/" element={<Home/>}/>
@@ -117,7 +118,7 @@ const App=()=> {
             />
           <Route path="/profile" element={authCtx.isLoggedIn ? <UserProfile/> : <Navigate to='/login'/>}/>
 
-          <Route path="/cart" element={authCtx.isLoggedIn ? <CartList cart={cart}/> :
+          <Route path="/cart" element={authCtx.isLoggedIn ? <CartList cart={authCtx.items}/> :
           //  <ProductList product={product} addToCart={addToCart}/>}/>
           <Login/>}/>
         </Routes>
