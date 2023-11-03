@@ -10,36 +10,18 @@ const CartList = ({cart}) => {
   const authCtx=useContext(AuthContext);
   
   const ChangeEmail=authCtx.email.replace('@','').replace('.','')
+  //const CART=authCtx.items;
 
   useEffect(()=>{
-
+     //const CART=authCtx.items;
     SETCART(cart);
   },[cart])
-     
-   const getCall=(data)=>{
-     axios.get(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`)
-     .then((result)=>{
-      console.log("result",result);
-      console.log(result.title);
-      SETCART(result.data,result.data.quantity,result.data.price);
-      //console.log(result.data.quantity);
-     })
-     .catch((error)=>{
-        alert(error);
-     })
-     //SETCART([...cart,{...data,quantity: 1}])
-     //SETCART(result.data);
-   }
-
    const deleteHandler=(id)=>{
       //alert(id);
-      axios.delete(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}/${id}`)
+      axios.delete(`https://crudcrud.com/api/507c456eea8a4ee5a8c4429de7076c07/${ChangeEmail}/${id}`)
       .then((res)=>{
-        console.log("delete",res);
-        getCall();
-        // const update=CART.filter(item =>item !==res)
-        // console.log("update",update);
-        // SETCART(update);
+        console.log("delete",id);
+        authCtx.removeItem(id);
       })
       .catch((error)=>{
         alert(error);
@@ -48,7 +30,7 @@ const CartList = ({cart}) => {
   return (
     <div className='cartshow'>
       {
-        CART?.map((cartItem,cartIndex)=>{
+        authCtx.items ?.map((cartItem,cartIndex)=>{
             return (
                 <div>
                   <button className='cross' onClick={()=>deleteHandler(cartItem._id)}><img src={CrossIcon} width={30}/></button><br/>
@@ -60,6 +42,7 @@ const CartList = ({cart}) => {
                         return cartIndex===index ? {...item, quantity: item.quantity>0 ? item.quantity -1 : 0}:item
                       })
                       SETCART(_CART)}}>-</button> &nbsp; 
+                      {/* CART(_CART)}}>-</button> &nbsp; */}
                     <span><b>{cartItem.quantity}</b></span>&nbsp; &nbsp;
                     <button className='plus-button'
                     onClick={()=>{
@@ -67,6 +50,7 @@ const CartList = ({cart}) => {
                         return cartIndex===index ? {...item, quantity: item.quantity+1}:item
                       })
                       SETCART(_CART)
+                      // CART(_CART);
                     }}>+</button>&nbsp;
                     <span><b>Rs. {cartItem.price*cartItem.quantity}</b></span><hr/>
                 </div>
@@ -75,7 +59,7 @@ const CartList = ({cart}) => {
       }
       <b><p className='total'> Total: <span> </span>
         {
-          cart?.map(item => item.price*item.quantity).reduce((total,value)=> total+value,0)
+          authCtx.items?.map(item => item.price*item.quantity).reduce((total,value)=> total+value,0)
         }
         
       </p></b>

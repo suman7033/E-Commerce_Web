@@ -57,10 +57,6 @@ const App=()=> {
         }
     ])
   const [cart,setCart]=useState([]);
-
-  //const [showCart,setShowCart]=useState(false);
-  //const [props,setProps]=useState([]);
-  const [showAbout,setShowAbout]=useState(false);
   const authCtx=useContext(AuthContext);
   //console.log("auth.email",authCtx.email);
 
@@ -72,7 +68,7 @@ const App=()=> {
 
   const addToCart=(data)=>{
     //console.log("data",data);
-    axios.post(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`,data)
+    axios.post(`https://crudcrud.com/api/507c456eea8a4ee5a8c4429de7076c07/${ChangeEmail}`,data)
         .then((res)=>{
             console.log("response_data after post",res.data);
             authCtx.addItem(res.data);
@@ -87,8 +83,11 @@ const App=()=> {
     if(!authCtx.isLoggedIn){
       setCart([])
     }else{
-    axios.get(`https://crudcrud.com/api/073db3c7a80c4994b26944889d7f45ff/${ChangeEmail}`)
+    axios.get(`https://crudcrud.com/api/507c456eea8a4ee5a8c4429de7076c07/${ChangeEmail}`)
     .then((res)=>{
+      authCtx.setItem(res.data);
+      console.log("usefeect",res.data);
+      //authCtx.quantity
       //console.log("get response",res.data);
       setCart(res.data);
       
@@ -99,7 +98,7 @@ const App=()=> {
   return (
   <>
     <BrowserRouter>
-      <Navbar count={cart.length} setShowAbout={setShowAbout}/>
+      <Navbar count={cart.length}/>
       <Suspense fallback={<h1>Loading...</h1>}>
        <Routes>
           <Route path="/" element={<Home/>}/>

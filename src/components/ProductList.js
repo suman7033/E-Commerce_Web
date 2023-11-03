@@ -3,9 +3,8 @@ import './Header.css'
 
 const ProductList = ({product,addToCart}) => {
   //console.log("insert store");
-  //console.log("product", product)
   return (
-    <div className='flex'>
+    <div className='flex' key={product.title}>
       {
         product.map((productItem,productIndex)=>{
             return (

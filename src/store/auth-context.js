@@ -11,6 +11,8 @@ const AuthContext =React.createContext({
 
     addItem: (item)=>{},
     removeItem: (id) =>{},
+    setItem: (data)=>{},
+    quantity: '',
     //clearCart: ()=>{},
 })
 
@@ -25,8 +27,6 @@ export const AuthContextProvider=(props)=>{
     const [totalAmount,setTotalAmount]=useState(0);
     const [quantity,setQuantity]=useState(0)
 
-    //const [isLoggedIn,setisLoggedIn]=useState(false);
-
     const [isLoggedIn, setIsLoggedIn] = useState(!!initialToken);
 
     const userIsLoggedIn=!!token;
@@ -35,12 +35,14 @@ export const AuthContextProvider=(props)=>{
         if (isLoggedIn) {
           localStorage.setItem("token", token);
           localStorage.setItem("email", email);
+          localStorage.setItem("quantity",quantity)
 
         } else {
           localStorage.removeItem("token");
           localStorage.removeItem("email");
+          localStorage.removeItem("quantity");
         }
-      }, [isLoggedIn, token, email]);
+      }, [isLoggedIn, token, email,quantity]);
 
 
     const loginHandler=(token,email)=>{
@@ -49,8 +51,6 @@ export const AuthContextProvider=(props)=>{
         setIsLoggedIn(true);
         //localStorage.setItem('token',token);
         setEmail(email);
-
-
     }
     const logoutHandler=()=>{
        setToken(null);
@@ -58,18 +58,23 @@ export const AuthContextProvider=(props)=>{
        setIsLoggedIn(false);
     }
     //console.log(isLoggedIn);
-    
-    const addItemHandler=(items)=>{
-       console.log("addItemHandler",items);
+    const addItemHandler=(props)=>{
+       console.log("addItemHandler",props);
+       //setItems(...prv,props);
+       setItems((prev)=>[...prev,props])
+       setQuantity(quantity+1);
     }
-    const removeItemHandler=()=>{
+    const removeItemHandler=(id)=>{
+        //setQuantity(quantity-1);
+        const arr=items.filter((prv)=>prv._id!==id)
+        setItems(arr);
+      
         
-
     }
-    // const clearCartHandler=()=>{
-
-    // }
-
+    const setItemHandler=(props)=>{
+        setItems(props);
+    }
+    console.log("context Item",items);
     const contextValue={
         token: token,
         email: email,
@@ -83,6 +88,7 @@ export const AuthContextProvider=(props)=>{
         quantity: quantity,
         addItem: addItemHandler,
         removeItem: removeItemHandler,
+        setItem: setItemHandler,
         //clearCart: clearCartHandler,
     }
     return (

@@ -33,7 +33,7 @@ const Navbar = (props) => {
   </li>
 
   <Link className={classes.cart} to="/cart">Cart
-    <sup className={classes.count}>{props.count}</sup></Link> &nbsp; &nbsp;
+    <sup className={classes.count}>{authCtx.items.length}</sup></Link> &nbsp; &nbsp;
 
     <div> 
     <Link to='/login'>Login</Link>
