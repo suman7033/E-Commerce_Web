@@ -68,7 +68,7 @@ const App=()=> {
 
   const addToCart=(data)=>{
     //console.log("data",data);
-    axios.post(`https://crudcrud.com/api/cc02e4e223a640b3a4599975db3eee7c/${ChangeEmail}`,data)
+    axios.post(`https://crudcrud.com/api/05cba5426496453f9fe23bad917a534e/${ChangeEmail}`,data)
         .then((res)=>{
             console.log("response_data after post",res.data);
             authCtx.addItem(res.data);
@@ -84,7 +84,7 @@ const App=()=> {
       //setCart([])
       authCtx.setItem([])
     }else{
-    axios.get(`https://crudcrud.com/api/cc02e4e223a640b3a4599975db3eee7c/${ChangeEmail}`)
+    axios.get(`https://crudcrud.com/api/05cba5426496453f9fe23bad917a534e/${ChangeEmail}`)
     .then((res)=>{
       authCtx.setItem(res.data);
       console.log("usefeect",res.data);
@@ -99,7 +99,7 @@ const App=()=> {
   return (
   <>
     <BrowserRouter>
-      <Navbar count={authCtx.items.length}/>
+      <Navbar count={authCtx.quantity}/>
       <Suspense fallback={<h1>Loading...</h1>}>
        <Routes>
           <Route path="/" element={<Home/>}/>

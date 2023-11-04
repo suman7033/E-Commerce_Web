@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from 'react'
+import { useContext } from 'react';
 
 const AuthContext =React.createContext({
     items: [],
-    totalAmount: 0,
+    price: 0,
     token: '',
     email: "",
     isLoggedIn: false,
@@ -12,7 +13,8 @@ const AuthContext =React.createContext({
     addItem: (item)=>{},
     removeItem: (id) =>{},
     setItem: (data)=>{},
-    quantity: '',
+    quantity: 0,
+    updateItem: (update)=>{},
     //clearCart: ()=>{},
 })
 
@@ -20,12 +22,17 @@ const AuthContext =React.createContext({
 export const AuthContextProvider=(props)=>{
     const initialToken=localStorage.getItem('token');
     const initialEmail=localStorage.getItem("email");
+    //const initialQuantity=localStorage.getItem("quantity")
+    const initialPrice=localStorage.getItem("price");
+
     const [token, setToken]=useState(initialToken);
     const [email,setEmail]=useState(initialEmail);
 
     const [items,setItems]=useState([]);
-    const [totalAmount,setTotalAmount]=useState(0);
-    const [quantity,setQuantity]=useState(0)
+    const authCtx=useContext(AuthContext);
+     
+    const [price,setPrice]=useState(initialPrice);
+    const [quantity,setQuantity]=useState(0);
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!initialToken);
 
@@ -35,7 +42,8 @@ export const AuthContextProvider=(props)=>{
         if (isLoggedIn) {
           localStorage.setItem("token", token);
           localStorage.setItem("email", email);
-          localStorage.setItem("quantity",quantity)
+          //localStorage.setItem("quantity",quantity)
+          localStorage.setItem("price",price);
 
         } else {
           localStorage.removeItem("token");
@@ -61,19 +69,49 @@ export const AuthContextProvider=(props)=>{
     const addItemHandler=(props)=>{
        console.log("addItemHandler",props);
        //setItems(...prv,props);
-       setItems((prev)=>[...prev,props])
-       //setQuantity(quantity+1);
+       setPrice(props.price);
+       //setItems((prev)=>[...prev,props])
+
+       const existingItem = items.find((cartItem) => cartItem._id === props._id);
+
+    if (existingItem) {
+      const updatedItems = items.map((cartItem) => {
+        if (cartItem._id === props._id) {
+          return {
+            ...cartItem,
+            quantity: Number(cartItem.quantity) +1,
+            price: cartItem.price + props.price,
+          };
+        }
+        return cartItem;
+      });
+
+      setItems(updatedItems);
+    } else {
+      setItems((prevItems) => [...prevItems, props]);
     }
-    const removeItemHandler=(id)=>{
+    console.log("items",items);
+
+    }
+     const removeItemHandler=(id)=>{
         //setQuantity(quantity-1);
+        console.log("id",id);
         const arr=items.filter((prv)=>prv._id!==id)
         setItems(arr);
-      
-        
+        //setItems((prev)=>[...prev,arr]);
+        console.log("id price",id.price);
+        //const currentPrice=authCtx.price-id.price
+        //setPrice(currentPrice);
     }
     const setItemHandler=(props)=>{
         setItems(props);
     }
+    const updateItemHandler=(item)=>{
+       console.log("updateItem",item);
+       
+
+    }
+
     console.log("context Item",items);
     const contextValue={
         token: token,
@@ -83,12 +121,13 @@ export const AuthContextProvider=(props)=>{
         login: loginHandler,
         logout: logoutHandler,
 
-        totalAmount: totalAmount,
+        price: price,
         items: items,
         quantity: quantity,
         addItem: addItemHandler,
         removeItem: removeItemHandler,
         setItem: setItemHandler,
+        updateItem: updateItemHandler,
         //clearCart: clearCartHandler,
     }
     return (

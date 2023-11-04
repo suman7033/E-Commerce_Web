@@ -5,14 +5,14 @@ import axios from 'axios';
 import AuthContext from '../store/auth-context';
 
 const CartList = ({cart}) => {
-
+  //const [cartp,setCartP]=useState(1)
   const authCtx=useContext(AuthContext);
   
   const ChangeEmail=authCtx.email.replace('@','').replace('.','')
   
    const deleteHandler=(id)=>{
       //alert(id);
-      axios.delete(`https://crudcrud.com/api/cc02e4e223a640b3a4599975db3eee7c/${ChangeEmail}/${id}`)
+      axios.delete(`https://crudcrud.com/api/05cba5426496453f9fe23bad917a534e/${ChangeEmail}/${id}`)
       .then((res)=>{
         console.log("delete",id);
         authCtx.removeItem(id);
@@ -33,30 +33,25 @@ const CartList = ({cart}) => {
 
                     <button className='minus-button'
                     onClick={()=>{
-                      const _CART=cart.map((item,index)=>{
-                        //console.log("_CART",_CART);
-                        return cartIndex===index ? {...item, quantity : cart.length-1}:item
-                      })
-                      authCtx.addItem(_CART)}}>-</button> &nbsp; 
+                      authCtx.removeItem(cartItem);
+                      }}>-</button> &nbsp;
                        
-                    <span><b>{authCtx.items.length}</b></span>&nbsp; &nbsp;
+                    <span><b>{cartItem.quantity}</b></span>&nbsp; &nbsp;
 
                     <button className='plus-button'
                     onClick={()=>{
-                      const _CART=cart.map((item,index)=>{
-                        return cartIndex===index ? {...item, quantity: cart.length+1}:item
-                      })
-                      authCtx.addItem(_CART)}}>+</button>&nbsp;
+                      authCtx.addItem(cartItem);
+                      }}>+</button>&nbsp;
                       
-
-                    <span><b>Rs. {cartItem.price*cartItem.quantity}</b></span><hr/>
+                    <span><b>Rs. {authCtx.price*cartItem.quantity}</b></span><hr/>
                 </div>
             )
         })
+         
       }
       <b><p className='total'> Total: <span> </span>
         {
-          authCtx.items?.map(item => item.price*item.quantity).reduce((total,value)=> total+value,0)
+          authCtx.items?.map(item => authCtx.price*authCtx.items.length).reduce((total,value)=> total+value,0)
         }
         
       </p></b>
@@ -65,3 +60,5 @@ const CartList = ({cart}) => {
 }
 
 export default CartList;
+
+ 
