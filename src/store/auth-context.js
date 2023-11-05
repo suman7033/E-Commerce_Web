@@ -15,6 +15,7 @@ const AuthContext =React.createContext({
     setItem: (data)=>{},
     quantity: 0,
     updateItem: (update)=>{},
+    DecreseHandler: (props)=>{},
     //clearCart: ()=>{},
 })
 
@@ -69,27 +70,9 @@ export const AuthContextProvider=(props)=>{
     const addItemHandler=(props)=>{
        console.log("addItemHandler",props);
        //setItems(...prv,props);
-       setPrice(props.price);
-       //setItems((prev)=>[...prev,props])
+       //setPrice(props.price);
+       setItems((prev)=>[...prev,props])
 
-       const existingItem = items.find((cartItem) => cartItem._id === props._id);
-
-    if (existingItem) {
-      const updatedItems = items.map((cartItem) => {
-        if (cartItem._id === props._id) {
-          return {
-            ...cartItem,
-            quantity: Number(cartItem.quantity) +1,
-            price: cartItem.price + props.price,
-          };
-        }
-        return cartItem;
-      });
-
-      setItems(updatedItems);
-    } else {
-      setItems((prevItems) => [...prevItems, props]);
-    }
     console.log("items",items);
 
     }
@@ -106,10 +89,52 @@ export const AuthContextProvider=(props)=>{
     const setItemHandler=(props)=>{
         setItems(props);
     }
-    const updateItemHandler=(item)=>{
-       console.log("updateItem",item);
-       
+    const updateItemHandler=(props)=>{
+       console.log("updateItem",props);
 
+       const existingItem = items.find((cartItem) => cartItem._id === props._id);
+
+       if (existingItem) {
+        const updatedItems = items.map((cartItem) => {
+          if (cartItem._id === props._id) {
+            return {
+              ...cartItem,
+              quantity: Number(cartItem.quantity) +1,
+              price: cartItem.price + props.price,
+            };
+          }
+          return cartItem;
+        });
+  
+        setItems(updatedItems);
+      } else {
+        setItems((prevItems) => [...prevItems, props]);
+      }
+    }
+    const DecreseHandler=(props)=>{
+        const existingItem=items.find((cartItem)=> cartItem._id===props._id);
+        if(existingItem){
+            const updatedItems=items.map((cartItem)=>{
+                if(cartItem._id===props._id){
+                    if(cartItem.quantity<=0){
+                        return {
+                            ...cartItem,
+                            quantity: 0,
+                            price: 0,
+                        }
+                    }
+                    return {
+                        ...cartItem,
+                        quantity: Number(cartItem.quantity) -1,
+                        price: cartItem.price-props.price,
+                    }
+                }
+                return cartItem;
+            })
+            setItems(updatedItems);
+        }else{
+            setItems((prevItems)=>[...prevItems,props]);
+        }
     }
 
     console.log("context Item",items);
@@ -128,6 +153,7 @@ export const AuthContextProvider=(props)=>{
         removeItem: removeItemHandler,
         setItem: setItemHandler,
         updateItem: updateItemHandler,
+        DecreseHandler: DecreseHandler,
         //clearCart: clearCartHandler,
     }
     return (

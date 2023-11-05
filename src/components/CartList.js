@@ -12,7 +12,7 @@ const CartList = ({cart}) => {
   
    const deleteHandler=(id)=>{
       //alert(id);
-      axios.delete(`https://crudcrud.com/api/05cba5426496453f9fe23bad917a534e/${ChangeEmail}/${id}`)
+      axios.delete(`https://crudcrud.com/api/d453141e5d874d74a2adb6992f4e5db2/${ChangeEmail}/${id}`)
       .then((res)=>{
         console.log("delete",id);
         authCtx.removeItem(id);
@@ -33,14 +33,14 @@ const CartList = ({cart}) => {
 
                     <button className='minus-button'
                     onClick={()=>{
-                      authCtx.removeItem(cartItem);
+                      authCtx.DecreseHandler(cartItem);
                       }}>-</button> &nbsp;
                        
                     <span><b>{cartItem.quantity}</b></span>&nbsp; &nbsp;
 
                     <button className='plus-button'
                     onClick={()=>{
-                      authCtx.addItem(cartItem);
+                      authCtx.updateItem(cartItem);
                       }}>+</button>&nbsp;
                       
                     <span><b>Rs. {authCtx.price*cartItem.quantity}</b></span><hr/>
