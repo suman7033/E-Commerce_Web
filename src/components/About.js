@@ -1,19 +1,19 @@
 import React from 'react'
 //import { Container } from 'react-dom';
-import classes from './about.css';
+import './about.css';
 
 const About = ({props}) => {
   return (
     <>
-      <h2 className={classes.head}>About</h2>
+      <h2 className='head'>About</h2>
       <div style={{ marginLeft: "60px" }}>
-        <div className={classes.contentWrapper}>
+        <div className='contentWrapper'>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Band%20Members.png"
             alt="music"
-            className={classes.img}
+            className='img'
           />
-          <p className={classes.paragraph}>
+          <p className='paragraph'>
             Lorem ipsum carrots enhanced rebates. Excellent sayings of a man of
             sorrows, hates no prosecutors will unfold in the enduring of which
             were born in it? Often leads smallest mistake some pain main

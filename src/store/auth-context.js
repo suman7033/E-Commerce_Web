@@ -73,9 +73,10 @@ export const AuthContextProvider=(props)=>{
        //setPrice(props.price);
        setItems((prev)=>[...prev,props])
 
-    console.log("items",items);
+    //console.log("items",items);
 
     }
+    console.log("items",items);
      const removeItemHandler=(id)=>{
         //setQuantity(quantity-1);
         console.log("id",id);
@@ -91,21 +92,19 @@ export const AuthContextProvider=(props)=>{
     }
     const updateItemHandler=(props)=>{
        console.log("updateItem",props);
-
        const existingItem = items.find((cartItem) => cartItem._id === props._id);
-
        if (existingItem) {
         const updatedItems = items.map((cartItem) => {
           if (cartItem._id === props._id) {
             return {
               ...cartItem,
               quantity: Number(cartItem.quantity) +1,
-              price: cartItem.price + props.price,
+              _price: cartItem.price + props.price,
             };
           }
           return cartItem;
+           
         });
-  
         setItems(updatedItems);
       } else {
         setItems((prevItems) => [...prevItems, props]);
@@ -114,8 +113,9 @@ export const AuthContextProvider=(props)=>{
     const DecreseHandler=(props)=>{
         const existingItem=items.find((cartItem)=> cartItem._id===props._id);
         if(existingItem){
-            const updatedItems=items.map((cartItem)=>{
+            const DecreseItems=items.map((cartItem)=>{
                 if(cartItem._id===props._id){
+                    console.log("DecresecartItem",cartItem);
                     if(cartItem.quantity<=0){
                         return {
                             ...cartItem,
@@ -126,12 +126,12 @@ export const AuthContextProvider=(props)=>{
                     return {
                         ...cartItem,
                         quantity: Number(cartItem.quantity) -1,
-                        price: cartItem.price-props.price,
+                        _price: cartItem.price-props.price,
                     }
                 }
                 return cartItem;
             })
-            setItems(updatedItems);
+            setItems(DecreseItems);
         }else{
             setItems((prevItems)=>[...prevItems,props]);
         }

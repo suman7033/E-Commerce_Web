@@ -1,11 +1,10 @@
-/* .head {
+.head {
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
   
     font-family: emoji;
     font-size: xx-large;
-    background-color: red;
   }
   
   .img {
@@ -19,6 +18,5 @@
   .paragraph {
     font-size: 17px;
     margin: 20px;
-    color: #cbc4c4;
-    background-color: red;
-}  */
+    color: #120c0c;
+} 

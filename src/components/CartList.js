@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
-import './Header.css'
+import './Cart.css';
 import CrossIcon from '../Img/cut_icon.png'
 import axios from 'axios';
 import AuthContext from '../store/auth-context';
@@ -12,7 +12,7 @@ const CartList = ({cart}) => {
   
    const deleteHandler=(id)=>{
       //alert(id);
-      axios.delete(`https://crudcrud.com/api/d453141e5d874d74a2adb6992f4e5db2/${ChangeEmail}/${id}`)
+      axios.delete(`https://crudcrud.com/api/2dd1b7bef9ec451daeccae894c538c9e/${ChangeEmail}/${id}`)
       .then((res)=>{
         console.log("delete",id);
         authCtx.removeItem(id);
@@ -28,7 +28,7 @@ const CartList = ({cart}) => {
             return (
                 <div>
                   <button className='cross' onClick={()=>deleteHandler(cartItem._id)}><img src={CrossIcon} width={30}/></button><br/>
-                    <img className='img' src={cartItem.imageUrl} width={60}/> <br/>
+                    <img className='img' src={cartItem.imageUrl}/><br/>
                     <span><b>{cartItem.title}</b></span><br/>
 
                     <button className='minus-button'
@@ -43,7 +43,7 @@ const CartList = ({cart}) => {
                       authCtx.updateItem(cartItem);
                       }}>+</button>&nbsp;
                       
-                    <span><b>Rs. {authCtx.price*cartItem.quantity}</b></span><hr/>
+                    <span><b>Rs. {cartItem.price*cartItem.quantity}</b></span><hr/>
                 </div>
             )
         })
@@ -51,7 +51,7 @@ const CartList = ({cart}) => {
       }
       <b><p className='total'> Total: <span> </span>
         {
-          authCtx.items?.map(item => authCtx.price*authCtx.items.length).reduce((total,value)=> total+value,0)
+          authCtx.items?.map(item => item.price*item.quantity).reduce((total,value)=> total+value,0)
         }
         
       </p></b>

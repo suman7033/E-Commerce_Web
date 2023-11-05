@@ -1,6 +1,9 @@
 .flex{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: none;
 }
 .shoping_cart{
     justify-content: space-between;
@@ -9,6 +12,7 @@
 }
 .product-item{
     padding: 20px;
+    margin: 10px;
 }
 .h1{
     margin-left: 480px;

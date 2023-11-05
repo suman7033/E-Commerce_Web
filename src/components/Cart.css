@@ -1,0 +1,29 @@
+.cartshow{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: none;
+}
+.img{
+     border-radius: none;
+}
+.shoping_cart{
+    justify-content: space-between;
+    background-color: rgb(195, 196, 196);
+    padding: 20px 30px;
+}
+.product-item{
+    padding: 20px;
+    margin: 10px;
+}
+.h1{
+    margin-left: 480px;
+    margin-right: 230px;
+}
+.cart{
+    background-color: rgb(230, 233, 227);
+    color: rgb(243, 87, 9);
+    margin-left: 100px;
+    
+}

@@ -68,7 +68,7 @@ const App=()=> {
 
   const addToCart=(data)=>{
     //console.log("data",data);
-    axios.post(`https://crudcrud.com/api/d453141e5d874d74a2adb6992f4e5db2/${ChangeEmail}`,data)
+    axios.post(`https://crudcrud.com/api/2dd1b7bef9ec451daeccae894c538c9e/${ChangeEmail}`,data)
         .then((res)=>{
             console.log("response_data after post",res.data);
             authCtx.addItem(res.data);
@@ -84,7 +84,7 @@ const App=()=> {
       //setCart([])
       authCtx.setItem([])
     }else{
-    axios.get(`https://crudcrud.com/api/d453141e5d874d74a2adb6992f4e5db2/${ChangeEmail}`)
+    axios.get(`https://crudcrud.com/api/2dd1b7bef9ec451daeccae894c538c9e/${ChangeEmail}`)
     .then((res)=>{
       authCtx.setItem(res.data);
       console.log("usefeect",res.data);
