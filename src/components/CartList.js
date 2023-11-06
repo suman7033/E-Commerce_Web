@@ -12,7 +12,7 @@ const CartList = ({cart}) => {
   
    const deleteHandler=(id)=>{
       //alert(id);
-      axios.delete(`https://crudcrud.com/api/2dd1b7bef9ec451daeccae894c538c9e/${ChangeEmail}/${id}`)
+      axios.delete(`https://crudcrud.com/api/c5eeea55ecc64d03a2c90f1f1e5506ce/${ChangeEmail}/${id}`)
       .then((res)=>{
         console.log("delete",id);
         authCtx.removeItem(id);
